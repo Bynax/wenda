@@ -1,0 +1,22 @@
+# config for mysql
+spring:
+  # config for mysql
+  datasource:
+    url: jdbc:mysql://localhost:3306/wenda?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: bhsysm0526
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # config for thymeleaf
+  thymeleaf:
+    mode: HTML5
+    encoding: utf-8
+    cache: false
+
+
+# config for mybatis
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: com.bohuanshi.wenda.model
+  mapper-locations: classpath:mybatis/mapper/*.xml
+

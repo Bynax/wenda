@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bohuanshi.wenda.dao.UserDAO">
+    <!--define the table name-->
+    <sql id="table">user</sql>
+
+    <!--define the insert fileds-->
+    <sql id="insert_fields">name, password, salt, head_url</sql>
+    <!--define the select fileds-->
+    <sql id="select_fields">id, name, password, salt, head_url</sql>
+
+    <!--insert-->
+    <insert id="addUser" >
+        insert into
+        <include refid="table"/>
+        (<include refid="insert_fields"/>)
+        values (#{name},#{password},#{salt},#{headUrl})
+    </insert>
+
+    <!--select-->
+    <select id="selectById" resultType="User">
+        select
+        <include refid="select_fields"/>
+        from
+        <include refid="table"/>
+        where id=#{id}
+    </select>
+
+    <select id="selectByName" resultType="User">
+        select
+        <include refid="select_fields"/>
+        from
+        <include refid="table"/>
+        where name=#{name}
+    </select>
+
+    <!--update password-->
+    <update id="updatePassword">
+        update
+        <include refid="table"/>
+        set password=#{password}
+        where id=#{id}
+    </update>
+
+    <!--delete user-->
+    <delete id="deleteById">
+        delete from
+        <include refid="table"/>
+        where id=#{id}
+    </delete>
+
+</mapper>
