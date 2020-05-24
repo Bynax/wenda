@@ -30,8 +30,8 @@ public class QuestDaoTest {
             date.setTime(date.getTime() + 1000 * 3600 * 5 * i);
             question.setCreatedDate(date);
             question.setUserId(i + 1);
-            question.setTitle(String.format("TITLE{%d}", i));
-            question.setContent(String.format("Balaababalalalal Content %d", i));
+            question.setTitle("hello");
+            question.setContent("nice to meet u and i want to see u");
             questionDAO.addQuestion(question);
         }
 

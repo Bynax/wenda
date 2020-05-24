@@ -3,9 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bohuanshi.wenda.dao.QuestionDAO">
     <sql id="table">question</sql>
-    <sql id="selectFields">id, title, content, comment_count,created_date,user_id
+    <sql id="selectFields">id, title, content, comment_count, created_date, user_id
     </sql>
-    <sql id="insertFields">title, content, comment_count,created_date,user_id</sql>
+    <sql id="insertFields">title, content, comment_count, created_date, user_id</sql>
 
     <!--select-->
     <select id="selectLatestQuestions" resultType="com.bohuanshi.wenda.model.Question">
@@ -17,6 +17,7 @@
         <if test="userId != 0">
             WHERE user_id = #{userId}
         </if>
+        ORDER BY id DESC
         LIMIT #{offset},#{limit}
     </select>
 
@@ -28,4 +29,24 @@
         values
         (#{title},#{content},#{commentCount},#{createdDate},#{userId})
     </insert>
+
+
+    <!--select-->
+    <select id="getById">
+        select
+        <include refid="selectFields"/>
+        from
+        <include refid="table"/>
+        where id=#{id}
+    </select>
+
+    <!--update comment count-->
+    <update id="updateCommentCount">
+        update
+        <include refid="table"/>
+        set comment_count = #{commentCount}
+        where id=#{id}
+    </update>
+
+
 </mapper>
