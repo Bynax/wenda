@@ -1,4 +1,4 @@
-<body xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <header th:replace="header.html"></header>
 <div class="zg-wrap zu-main clearfix " role="main">
     <div class="zu-main-content">
@@ -95,5 +95,5 @@
     </div>
 </div>
 
-<div th:replace="js.html"></div>
-<footer th:replace="footer.html"></footer>
+<div th:include="js.html"></div>
+<footer th:include="footer.html"></footer>

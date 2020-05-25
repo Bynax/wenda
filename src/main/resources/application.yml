@@ -23,3 +23,10 @@ mybatis:
   type-aliases-package: com.bohuanshi.wenda.model
   mapper-locations: classpath:mybatis/mapper/*.xml
 
+# for debug
+#logging:
+#  level:
+#    com:
+#      bohuanshi:
+#        wenda:
+#          dao: debug

@@ -22,4 +22,9 @@ public class HostHolder {
     public void clear(){
         users.remove();
     }
+
+    @Override
+    public String toString() {
+        return users.toString();
+    }
 }

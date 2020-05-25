@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * @Author: bohuanshi
  * @Date: 2020/5/24 20:52
- * @Description:
+ * @Description: 覆盖到所有实体的评论
  */
 
 public class Comment {
@@ -15,7 +15,7 @@ public class Comment {
     private int entityType;
     private String content;
     private Date createdDate;
-    private int status;
+    private int status; // 评论可能被删掉，标识评论是否正常
 
     public int getId() {
         return id;

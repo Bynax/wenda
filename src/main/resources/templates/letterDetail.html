@@ -1,0 +1,30 @@
+<html lang="zh-CN" dropeffect="none"
+      class="js is-AppPromotionBarVisible cssanimations csstransforms csstransitions flexbox no-touchevents no-mobile"
+      xmlns:th="http://www.thymeleaf.org">
+<header th:include="header.html"></header>
+<link rel="stylesheet" href="../styles/letter.css">
+<div id="main">
+    <div class="zg-wrap zu-main clearfix ">
+        <ul class="letter-chatlist" th:each="message : ${messages}">
+            <li id="msg-item-4009580">
+                <a class="list-head">
+                    <img alt="头像" th:src="${message.headUrl}">
+                </a>
+                <div class="tooltip fade right in">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner letter-chat clearfix">
+                        <div class="letter-info">
+                            <p class="letter-time"
+                            th:text="${#dates.format(message.get('message').createdDate,'yyyy-MM-dd HH:mm:ss')}"></p>
+                        </div>
+                        <p class="chat-content" th:text="${message.get('message').content}">
+                        </p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+<footer th:include="footer.html"></footer>

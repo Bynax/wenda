@@ -5,6 +5,7 @@ import com.bohuanshi.wenda.dao.UserDAO;
 import com.bohuanshi.wenda.model.Question;
 import com.bohuanshi.wenda.model.User;
 import com.bohuanshi.wenda.service.QuestionService;
+import com.bohuanshi.wenda.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +27,9 @@ public class UserDAOTest {
 
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    UserService userService;
 
     @Test
     public void addUserTest() {
@@ -59,6 +63,11 @@ public class UserDAOTest {
     @Test
     public void deleteUser(){
         userDAO.deleteById(2);
+    }
+
+    @Test
+    void loginTest(){
+        userService.login("xxx","xxx");
     }
 
 }

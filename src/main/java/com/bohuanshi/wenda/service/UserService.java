@@ -89,11 +89,11 @@ public class UserService {
         return map;
     }
 
-    public String addLoginTicket(int userId) {
+    private String addLoginTicket(int userId) {
         LoginTicket loginTicket = new LoginTicket();
         loginTicket.setUserId(userId);
         Date now = new Date();
-        now.setTime(3600 * 24 + now.getTime());
+        now.setTime(3600 * 24 * 1000 + now.getTime());
         loginTicket.setExpired(now);
         loginTicket.setStatus(0);
         loginTicket.setTicket(UUID.randomUUID().toString().replaceAll("-", ""));
@@ -104,6 +104,10 @@ public class UserService {
 
     public void logout(String ticket) {
         loginTicketDAO.updateStatus(ticket, 1);
+    }
+
+    public User selectByName(String name) {
+        return userDAO.selectByName(name);
     }
 
 }

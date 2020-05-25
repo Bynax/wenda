@@ -2,7 +2,6 @@ package com.bohuanshi.wenda.configuration;
 
 import com.bohuanshi.wenda.interceptor.LoginInterceptor;
 import com.bohuanshi.wenda.interceptor.PassportInterceptor;
-import com.bohuanshi.wenda.model.LoginTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

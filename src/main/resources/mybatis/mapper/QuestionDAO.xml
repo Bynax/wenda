@@ -32,7 +32,7 @@
 
 
     <!--select-->
-    <select id="getById">
+    <select id="getById" resultType="Question">
         select
         <include refid="selectFields"/>
         from

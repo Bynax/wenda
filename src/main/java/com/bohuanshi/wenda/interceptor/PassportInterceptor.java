@@ -5,6 +5,8 @@ import com.bohuanshi.wenda.dao.UserDAO;
 import com.bohuanshi.wenda.model.HostHolder;
 import com.bohuanshi.wenda.model.LoginTicket;
 import com.bohuanshi.wenda.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -31,34 +33,39 @@ public class PassportInterceptor implements HandlerInterceptor {
 
     @Autowired
     HostHolder hostHolder;
+
+    private static final Logger logger = LoggerFactory.getLogger(PassportInterceptor.class);
+
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ticket = null;
-        if(request.getCookies() != null){
+        if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
-                if(cookie.getName().equals("ticket")){
+                if (cookie.getName().equals("ticket")) {
                     ticket = cookie.getValue();
                     break;
                 }
             }
 
         }
-        if(ticket != null){
+        if (ticket != null) {
             LoginTicket loginTicket = loginTicketDAO.selectByTicket(ticket);
-            if(loginTicket == null || loginTicket.getExpired().before(new Date()) || loginTicket.getStatus() != 0){
+            if (loginTicket == null || loginTicket.getExpired().before(new Date()) || loginTicket.getStatus() != 0) {
                 return true;
             }
 
             User user = userDAO.selectById(loginTicket.getUserId());
             hostHolder.setUser(user);
         }
+
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        if(modelAndView != null){
-            modelAndView.addObject("user",hostHolder.getUser());
+        if (modelAndView != null) {
+            modelAndView.addObject("user", hostHolder.getUser());
         }
     }
 
@@ -66,4 +73,6 @@ public class PassportInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         hostHolder.clear();
     }
+
+
 }
