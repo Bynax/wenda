@@ -34,7 +34,7 @@ public class UserDAOTest {
     @Test
     public void addUserTest() {
         Random random = new Random();
-        for (int i = 2; i < 15; i++) {
+        for (int i = 1; i < 15; i++) {
             User user = new User();
             user.setHeadUrl(String.format("http://images.nowcoder.com/head/%dt.png", random.nextInt(1000)));
             user.setName(String.format("USER%d", i));

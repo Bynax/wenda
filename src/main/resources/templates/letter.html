@@ -2,8 +2,12 @@
 <html lang="zh-CN" dropeffect="none"
       class="js is-AppPromotionBarVisible cssanimations csstransforms csstransitions flexbox no-touchevents no-mobile"
       xmlns:th="http://www.thymeleaf.org">
-<header th:include="header.html"></header>
+
+<head th:replace="header ::header"></head>
 <link rel="stylesheet" href="../styles/letter.css">
+<body>
+<div th:replace="header ::banner">
+</div>
     <div id="main">
         <div class="zg-wrap zu-main clearfix ">
             <ul class="letter-list" th:each="conversation : ${conversations}">
@@ -40,4 +44,6 @@
 
         </div>
     </div>
-<footer th:include="footer.html"></footer>
+
+</body>
+</html>
