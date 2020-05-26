@@ -18,6 +18,9 @@ public class MessageService {
     @Autowired
     MessageDAO messageDAO;
 
+//    select from_id, to_id, content, has_read, conversation_id, created_date , count(id) as id from ( select * from message where from_id=15 or to_id=15 order by created_date desc) tt group by conversation_id order by created_date desc limit 0, 10
+// c.b.w.d.MessageDAO.getConversationList   : ==> Parameters: 15(Integer), 15(Integer), 0(Integer), 10(Integer)
+
     @Autowired
     SensitiveService sensitiveService;
 
@@ -35,6 +38,6 @@ public class MessageService {
     }
 
     public int getConvesationUnreadCount(int userId, String conversationId) {
-        return messageDAO.getConvesationUnreadCount(userId, conversationId);
+        return messageDAO.getConversationUnreadCount(userId, conversationId);
     }
 }

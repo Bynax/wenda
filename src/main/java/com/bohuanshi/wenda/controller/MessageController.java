@@ -38,7 +38,7 @@ public class MessageController {
     public String conversationDetail(Model model) {
         try {
             int localUserId = hostHolder.getUser().getId();
-            List<ViewObject> conversations = new ArrayList<ViewObject>();
+            List<ViewObject> conversations = new ArrayList<>();
 
             List<Message> conversationList = messageService.getConversationList(localUserId, 0, 10);
             for (Message msg : conversationList) {
@@ -53,6 +53,7 @@ public class MessageController {
             model.addAttribute("conversations", conversations);
         } catch (Exception e) {
             logger.error("获取站内信列表失败" + e.getMessage());
+            logger.error(e.toString());
         }
         return "letter";
     }

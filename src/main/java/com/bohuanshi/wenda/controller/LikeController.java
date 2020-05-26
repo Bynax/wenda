@@ -1,5 +1,8 @@
 package com.bohuanshi.wenda.controller;
 
+import com.bohuanshi.wenda.async.EventModel;
+import com.bohuanshi.wenda.async.EventProducer;
+import com.bohuanshi.wenda.async.EventType;
 import com.bohuanshi.wenda.model.Comment;
 import com.bohuanshi.wenda.model.EntityType;
 import com.bohuanshi.wenda.model.HostHolder;
@@ -30,8 +33,8 @@ public class LikeController {
     @Autowired
     CommentService commentService;
 
-//    @Autowired
-//    EventProducer eventProducer;
+    @Autowired
+    EventProducer eventProducer;
 
     @RequestMapping(path = {"/like"}, method = {RequestMethod.POST})
     @ResponseBody
@@ -40,12 +43,12 @@ public class LikeController {
             return WendaUtil.getJSONString(999);
         }
 
-//        Comment comment = commentService.getCommentById(commentId);
+        Comment comment = commentService.getCommentById(commentId);
 
-//        eventProducer.fireEvent(new EventModel(EventType.LIKE)
-//                .setActorId(hostHolder.getUser().getId()).setEntityId(commentId)
-//                .setEntityType(EntityType.ENTITY_COMMENT).setEntityOwnerId(comment.getUserId())
-//                .setExt("questionId", String.valueOf(comment.getEntityId())));
+        eventProducer.fireEvent(new EventModel(EventType.LIKE)
+                .setActorId(hostHolder.getUser().getId()).setEntityId(commentId)
+                .setEntityType(EntityType.ENTITY_COMMENT).setEntityOwnerId(comment.getUserId())
+                .setExt("questionId", String.valueOf(comment.getEntityId())));
 
         long likeCount = likeService.like(hostHolder.getUser().getId(), EntityType.ENTITY_COMMENT, commentId);
         return WendaUtil.getJSONString(0, String.valueOf(likeCount));
